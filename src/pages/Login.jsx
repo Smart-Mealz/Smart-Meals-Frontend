@@ -11,7 +11,7 @@ const Login = () => {
             <Link to="/" className="hover:underline">Home</Link> /{' '}
             <span className="text-gray-900">My account</span>
           </nav>
-          <h1 className="text-4xl font-serif text-red-500">My account</h1>
+          <h1 className="text-4xl font-serif text-red-500">My Smartmeal account</h1>
         </div>
       </div>
 
