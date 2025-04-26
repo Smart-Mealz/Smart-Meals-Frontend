@@ -22,8 +22,7 @@ function App() {
           <Route path="/meals" element={<AllMeals />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="login" element={<Login/>} />
-
+          <Route path="/login" element={<Login/>} />
         </Routes>
       </BrowserRouter>
     </>
