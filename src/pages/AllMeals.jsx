@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../components/Header";
 import veggies from "../assets/images/veggies.png"
 import Mealskit from "../components/Mealskit";
 import { FaInstagram } from "react-icons/fa";
@@ -11,6 +12,7 @@ import Footer from "../components/Footer";
 const AllMeals = () => {
   return (
     <>
+    <Header/>
     <section className="bg-white text-center py-10 px-4">
       {/* Promo Banner */}
       <div className="bg-green-500 text-white py-4 px-6 rounded-md max-w-3xl mx-auto mb-6">
@@ -79,11 +81,11 @@ const AllMeals = () => {
               <div>
                 <p className="font-semibold mb-4">FOLLOW US</p>
                 <div className="flex justify-center md:justify-start gap-4 text-gray-500 text-2xl">
-                  <FaInstagram/>
-                  <FaTiktok/>
-                  <FaFacebook/>
-                  <FaPinterest/>
-                  <FaYoutube/>
+                  <a href=""><FaInstagram /></a>
+                                <a href=""><FaTiktok /></a>
+                                <a href=""><FaFacebook /></a>
+                                <a href=""><FaPinterest /></a>
+                                <a href=""><FaYoutube /></a>
                 </div>
               </div>
     

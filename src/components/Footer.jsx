@@ -46,7 +46,7 @@ const Footer = () => {
         <div>
           <p className="font-semibold mb-2 text-white">Customer Support</p>
           <p>Help Center & FAQ</p>
-          <p>contact@blueapron.com</p>
+          <p>contact@smartmeal.com</p>
           <p>(646) 891-4349</p>
         </div>
       </div>
@@ -57,7 +57,7 @@ const Footer = () => {
       {/* Bottom footer: Legal + App Links */}
       <div className="max-w-7xl mx-auto py-6 px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-gray-400">
         <div className="text-xs space-x-4 text-center md:text-left">
-          <span>© Blue Apron, LLC 2025</span>
+          <span>© SmartMeal, LLC 2025</span>
           <span>Do Not Sell or Share</span>
           <span>My Info</span>
           <span>Privacy</span>

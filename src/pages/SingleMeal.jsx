@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../components/Header";
 import chicken from "../assets/images/chicken.png";
 import Footer from "../components/Footer";
 import mealkit4 from "../assets/images/mealkit4.png";
@@ -7,11 +8,12 @@ import { FaTiktok } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaPinterest } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import Mealkit from "../components/Mealkit";
+
 
 const SingleMeal = () => {
   return (
     <>
+    <Header/>
       <section className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Image */}
         <div className="relative">
@@ -74,12 +76,12 @@ const SingleMeal = () => {
           </p>
 
           <a href="#" className="text-orange-500 font-semibold hover:underline">
-            CLICK FOR RECIPE CARD
+            YOUR HEALTH, OUR PRIORITY!
           </a>
 
           <div className="mt-6">
             <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded hover:bg-orange-600">
-              SEE PLANS
+              SEE RECIPE
             </button>
           </div>
 

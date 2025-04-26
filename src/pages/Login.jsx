@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const Login = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header/>
       {/* Hero / Breadcrumb */}
       <div className="bg-gray-100 py-8">
         <div className="max-w-3xl mx-auto px-4">
@@ -11,7 +14,7 @@ const Login = () => {
             <Link to="/" className="hover:underline">Home</Link> /{' '}
             <span className="text-gray-900">My account</span>
           </nav>
-          <h1 className="text-4xl font-serif text-red-500">My Smartmeal account</h1>
+          <h1 className="text-4xl font-serif text-green-500">My Smartmeal account</h1>
         </div>
       </div>
 
@@ -59,13 +62,14 @@ const Login = () => {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-red-500 text-white py-2 rounded-md font-medium hover:bg-red-600 transition"
+              className="w-full bg-green-500 text-white py-2 rounded-md font-medium hover:bg-green-500 transition"
             >
               Log In
             </button>
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }
