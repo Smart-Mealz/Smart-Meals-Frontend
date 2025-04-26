@@ -8,11 +8,14 @@ import AllMeals from "./pages/AllMeals";
 import ContactUs from "./pages/ContactUs";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import { Toaster } from "react-hot-toast";
+import VerifyEmail from "./pages/VerifyEmail";
 
 
 function App() {
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,6 +26,7 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </BrowserRouter>
     </>

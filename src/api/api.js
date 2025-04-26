@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // Create an Axios instance
 const api = axios.create({
-  baseURL: 'https://smart-meals-backend.onrender.com/api/v1/', // TODO: Update this
+  baseURL: 'https://smart-meals-backend.onrender.com/api/v1', // TODO: Update this
   timeout: 10000, // 10 seconds timeout
   headers: {
     'Content-Type': 'application/json',

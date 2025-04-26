@@ -1,33 +1,50 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import api from '../api/api'
+import { toast } from 'react-hot-toast'
 
 const Login = () => {
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  // inside handleSubmit
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
     try {
-      const response = await api.post('/auth/login', { email, password })
+      const response = await api.post('/users/login', formData)
 
-      // Save token
-      localStorage.setItem('token', response.data.token)
+      if (response.status === 200) {
+        const { accessToken, user, message } = response.data
 
-      // Redirect after login
-      navigate('/dashboard')
+        // Save token (optional: you could use sessionStorage instead if you want it temporary)
+        localStorage.setItem('token', accessToken)
+        localStorage.setItem('user', JSON.stringify(user))
+
+        toast.success(message || 'Login successful!')
+        setTimeout(() => {
+          navigate('/meals')
+        }, 1500)
+      } else {
+        toast.error('Login failed. Please try again.')
+      }
     } catch (err) {
       console.error(err)
-      setError(err.response?.data?.message || 'Invalid login credentials')
+      toast.error(err.response?.data?.message || 'Something went wrong.')
+      setError(err.response?.data?.message || 'Something went wrong.')
     } finally {
       setLoading(false)
     }
@@ -38,7 +55,7 @@ const Login = () => {
       <Header />
 
       <div className="min-h-screen bg-gray-50">
-        {/* Hero / Breadcrumb */}
+        {/* Hero */}
         <div className="bg-gray-100 py-8">
           <div className="max-w-3xl mx-auto px-4">
             <nav className="text-sm text-gray-600 mb-2">
@@ -49,17 +66,15 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Login Card */}
+        {/* Login Form */}
         <div className="max-w-md mx-auto px-4 py-12">
           <div className="bg-white border border-gray-200 rounded-lg shadow p-8">
-            <h2 className="text-center text-xl font-semibold mb-6">Login</h2>
-
-            {/* Error message */}
             {error && (
               <div className="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded">
                 {error}
               </div>
             )}
+            <h2 className="text-center text-xl font-semibold mb-6">Login</h2>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
               {/* Email */}
@@ -69,9 +84,10 @@ const Login = () => {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="you@example.com"
@@ -85,9 +101,10 @@ const Login = () => {
                 </label>
                 <input
                   id="password"
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
                   required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="••••••••"
@@ -101,7 +118,7 @@ const Login = () => {
                 </Link>
               </div>
 
-              {/* Submit */}
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={loading}
