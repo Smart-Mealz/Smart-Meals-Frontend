@@ -15,7 +15,7 @@ const Header = () => {
     const userData = JSON.parse(localStorage.getItem("user")); // Replace with your actual method
     if (userData) {
       setIsLoggedIn(true);
-      setUserName(userData.firstName); // Replace with actual user name from response
+      setUserName(userData.firstname); // Replace with actual user name from response
     }
   }, []);
 
