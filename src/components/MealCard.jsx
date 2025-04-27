@@ -30,7 +30,6 @@ const MealCard = ({ image, title, description, time, price, quantity, servings, 
       navigate(`/meal/${mealkitId}`); // navigate to detail page
     } else {
       // If not logged in, save the current page URL and redirect to login page
-      const currentPage = window.location.pathname;
       navigate("/login", { state: { redirectTo: `/meal/${mealkitId}` } });
     }
   };
