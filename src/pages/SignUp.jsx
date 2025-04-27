@@ -21,7 +21,7 @@ const SignUp = () => {
       <div className="min-h-screen bg-white flex flex-col items-center pt-12">
         <div className="w-full text-center bg-green-200 py-10 ">
           <p className="text-sm text-gray-500">
-            Home / <span className="text-gray-900">Sign Up</span>
+            <span className="text-gray-900">Sign Up</span>
           </p>
           <h1 className="text-3xl text-green-500 font-medium">My account</h1>
         </div>
