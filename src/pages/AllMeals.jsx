@@ -1,6 +1,6 @@
 import React from "react";
 import veggies from "../assets/images/veggies.png"
-import Mealskit from "../components/Mealskit";
+import MealKits from "../components/MealKits";
 import { FaInstagram } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
@@ -75,7 +75,7 @@ const AllMeals = () => {
           <p className="text-gray-800 font-medium mb-2">Week of April 21st</p>
         </section>
 
-        <Mealskit />
+        <MealKits />
       </section>
       <div className="bg-white border-t py-10 px-4 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         {/* Social Media Icons */}

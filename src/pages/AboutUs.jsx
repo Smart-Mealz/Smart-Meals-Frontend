@@ -1,10 +1,13 @@
 import React from 'react'
 import chef from "../assets/images/chef.png"
 import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 
 const AboutUs = () => {
   return (
+    <>
+    <Header />
     <div className="bg-white text-gray-800">
         
       {/* Hero Section */}
@@ -64,6 +67,7 @@ const AboutUs = () => {
       </section>
       <Footer/>
     </div>
+    </>
   )
 }
 

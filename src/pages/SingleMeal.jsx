@@ -7,7 +7,7 @@ import { FaTiktok } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaPinterest } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import Mealkit from "../components/Mealkit";
+import MealCard from "../components/MealCard";
 
 const SingleMeal = () => {
   return (
