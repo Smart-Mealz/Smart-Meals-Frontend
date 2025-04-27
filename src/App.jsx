@@ -3,7 +3,6 @@ import { CartProvider } from "./context/CartContext";
 import "./App.css";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
-import MealPlan from "./pages/MealPlan";
 import SingleMeal from "./pages/SingleMeal";
 import AllMeals from "./pages/AllMeals";
 import ContactUs from "./pages/ContactUs";
@@ -25,8 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/meal-plan" element={<MealPlan />} />
-            <Route path="/meal" element={<SingleMeal />} />
+            <Route path="/meal/:mealkitId" element={<SingleMeal />} />
             <Route path="/meals" element={<AllMeals />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/sign-up" element={<SignUp />} />
@@ -36,7 +34,6 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/cart" element={<CartPage />} /> 
             <Route path="/checkout" element={<CheckoutPage />} /> 
-
           </Routes>
         </BrowserRouter>
       </CartProvider>
