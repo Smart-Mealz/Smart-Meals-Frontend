@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import Header from '../components/Header'
 import api from '../api/api'
 import { toast } from 'react-hot-toast'
+import Footer from '../components/Footer'
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -58,7 +59,7 @@ const SignUp = () => {
           <p className="text-sm text-gray-500">
             Home / <span className="text-gray-900">Sign Up</span>
           </p>
-          <h1 className="text-3xl text-orange-500 font-medium">My account</h1>
+          <h1 className="text-3xl text-orange-500 font-medium">My Account</h1>
         </div>
 
         {/* Form Card */}
@@ -79,7 +80,7 @@ const SignUp = () => {
                 onChange={handleChange}
                 required
                 className="w-full border rounded-md p-2"
-                placeholder="First name"
+                placeholder="Enter First name"
               />
             </div>
 
@@ -93,7 +94,7 @@ const SignUp = () => {
                 onChange={handleChange}
                 required
                 className="w-full border rounded-md p-2"
-                placeholder="Last name"
+                placeholder="Enter Last name"
               />
             </div>
 
@@ -107,7 +108,7 @@ const SignUp = () => {
                 onChange={handleChange}
                 required
                 className="w-full border rounded-md p-2"
-                placeholder="Email address"
+                placeholder="eg.kofi847@gmail.com"
               />
             </div>
 
@@ -176,6 +177,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   )
 }

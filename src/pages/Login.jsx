@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'; // import use
 import Header from '../components/Header';
 import api from '../api/api';
 import { toast } from 'react-hot-toast';
+import Footer from '../components/Footer';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const Login = () => {
               <Link to="/" className="hover:underline">Home</Link> /{' '}
               <span className="text-gray-900">My account</span>
             </nav>
-            <h1 className="text-4xl font-serif text-red-500">My Smartmeal account</h1>
+            <h1 className="text-4xl font-serif text-green-500">My Smartmeal Account</h1>
           </div>
         </div>
 
@@ -72,7 +73,7 @@ const Login = () => {
         <div className="max-w-md mx-auto px-4 py-12">
           <div className="bg-white border border-gray-200 rounded-lg shadow p-8">
             {error && (
-              <div className="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded">
+              <div className="mb-4 text-sm text-green-500 bg-red-100 p-2 rounded">
                 {error}
               </div>
             )}
@@ -124,7 +125,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-red-500 text-white py-2 rounded-md font-medium hover:bg-red-600 transition disabled:opacity-50"
+                className="w-full bg-green-500 text-white py-2 rounded-md font-medium hover:bg-green-600 transition disabled:opacity-50"
               >
                 {loading ? 'Logging in...' : 'Log In'}
               </button>
@@ -132,6 +133,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

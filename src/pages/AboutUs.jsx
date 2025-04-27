@@ -11,7 +11,7 @@ const AboutUs = () => {
     <div className="bg-white text-gray-800">
         
       {/* Hero Section */}
-      <section className="bg-orange-300 py-16 px-6 text-center">
+      <section className="bg-green-300 py-16 px-6 text-center">
         <h1 className="text-4xl font-bold text-orange-400 mb-4">About Us</h1>
         <p className="max-w-2xl mx-auto text-lg text-gray-900">
           We are on a mission to make home cooking simple, affordable, and delicious for everyone.
