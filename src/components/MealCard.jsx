@@ -22,7 +22,17 @@ const MealCard = ({ image, title, description, time, price, quantity, servings, 
   };
 
   const handleCardClick = () => {
-    navigate(`/meal/${mealkitId}`); // navigate to detail page
+    // Check if the user is logged in (replace this with actual login check)
+    const isLoggedIn = localStorage.getItem("user");
+
+    if (isLoggedIn) {
+      // If logged in, proceed to add to cart
+      navigate(`/meal/${mealkitId}`); // navigate to detail page
+    } else {
+      // If not logged in, save the current page URL and redirect to login page
+      const currentPage = window.location.pathname;
+      navigate("/login", { state: { redirectTo: `/meal/${mealkitId}` } });
+    }
   };
 
   const increaseQuantity = () => {
