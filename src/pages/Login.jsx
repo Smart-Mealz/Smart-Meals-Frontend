@@ -1,54 +1,56 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
-import api from '../api/api'
-import { toast } from 'react-hot-toast'
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom'; // import useLocation
+import Header from '../components/Header';
+import api from '../api/api';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation(); // Get location state passed through the navigation
+  const { redirectTo } = location.state || { redirectTo: '/meals' }; // Default redirect to '/meals'
 
   const [formData, setFormData] = useState({
     email: '',
     password: ''
-  })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+    e.preventDefault();
+    setError('');
+    setLoading(true);
 
     try {
-      const response = await api.post('/users/login', formData)
+      const response = await api.post('/users/login', formData);
 
       if (response.status === 200) {
-        const { accessToken, user, message } = response.data
+        const { accessToken, user, message } = response.data;
 
         // Save token (optional: you could use sessionStorage instead if you want it temporary)
-        localStorage.setItem('token', accessToken)
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('user', JSON.stringify(user));
 
-        toast.success(message || 'Login successful!')
+        toast.success(message || 'Login successful!');
         setTimeout(() => {
-          navigate('/meals')
-        }, 1500)
+          navigate(redirectTo); // Redirect to the page they were trying to access
+        }, 1500);
       } else {
-        toast.error('Login failed. Please try again.')
+        toast.error('Login failed. Please try again.');
       }
     } catch (err) {
-      console.error(err)
-      toast.error(err.response?.data?.message || 'Something went wrong.')
-      setError(err.response?.data?.message || 'Something went wrong.')
+      console.error(err);
+      toast.error(err.response?.data?.message || 'Something went wrong.');
+      setError(err.response?.data?.message || 'Something went wrong.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -131,7 +133,7 @@ const Login = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

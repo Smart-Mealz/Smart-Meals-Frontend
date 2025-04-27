@@ -40,8 +40,13 @@ export const CartProvider = ({ children }) => {
     updateCartInLocalStorage(updatedCart);
   };
 
+  // Clear the cart
+  const clearCart = () => {
+    updateCartInLocalStorage([]); // Clear the cart from localStorage and state
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

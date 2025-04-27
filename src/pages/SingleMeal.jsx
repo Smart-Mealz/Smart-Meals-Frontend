@@ -31,7 +31,17 @@ const SingleMeal = () => {
   }, [mealkitId]);
 
   const handleAddToCart = () => {
-    addToCart(meal, cartQuantity); // 🛎️ Add the meal to the global cart
+    // Check if the user is logged in (replace this with actual login check)
+    const isLoggedIn = localStorage.getItem("user");
+
+    if (isLoggedIn) {
+      // If logged in, proceed to add to cart
+      addToCart(meal, cartQuantity);
+    } else {
+      // If not logged in, save the current page URL and redirect to login page
+      const currentPage = window.location.pathname;
+      navigate("/login", { state: { redirectTo: currentPage } });
+    }
   };
 
   const increaseQuantity = () => {

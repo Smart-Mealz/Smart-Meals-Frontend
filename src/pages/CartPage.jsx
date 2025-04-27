@@ -32,7 +32,8 @@ const CartPage = () => {
                                     <div>
                                         <h3 className="text-lg font-semibold">{item.title}</h3>
                                         <p>Quantity: {item.quantity}</p>
-                                        <p>Price: ${item.price * item.quantity}</p>
+                                        <p>Unit Price: {item.price}</p>
+                                        <p className="font-bold">Sub Total: ${item.price * item.quantity}</p>
                                     </div>
                                 </div>
                                 <button
