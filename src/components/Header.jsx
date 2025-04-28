@@ -88,9 +88,9 @@ const Header = () => {
         ) : (
           <>
             <Link to="/login" className="text-gray-700 hover:text-orange-500">Login</Link>
-            <button className="font-semibold bg-orange-300 hover:bg-orange-400 p-2 w-25 h-9">
-              <Link to="/sign-up" className="text-white">Sign Up</Link>
-            </button>
+              <Link to="/sign-up" className="text-white"><button className="font-semibold cursor-pointer bg-orange-300 hover:bg-orange-400 p-2 w-25 h-9">
+                Sign Up
+              </button></Link>
           </>
         )}
       </div>

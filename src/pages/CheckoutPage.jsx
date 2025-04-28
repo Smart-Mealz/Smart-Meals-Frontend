@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-hot-toast'; // For showing toast notifications
+import { toast } from 'react-hot-toast';
 import Header from '../components/Header';
+import { motion, AnimatePresence } from 'framer-motion'; // ✨ Animation
 
 const CheckoutPage = () => {
     const { cart } = useCart();
@@ -21,8 +22,8 @@ const CheckoutPage = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [orderPlaced, setOrderPlaced] = useState(false); // ✨ Modal State
 
-    // Form validation states
     const [errors, setErrors] = useState({
         firstName: '',
         lastName: '',
@@ -47,45 +48,32 @@ const CheckoutPage = () => {
         let valid = true;
         const newErrors = { ...errors };
 
-        // First Name Validation
         if (!formData.firstName) {
             newErrors.firstName = 'First name is required';
             valid = false;
         }
-
-        // Last Name Validation
         if (!formData.lastName) {
             newErrors.lastName = 'Last name is required';
             valid = false;
         }
-
-        // Country Validation
         if (!formData.country) {
             newErrors.country = 'Country is required';
             valid = false;
         }
-
-        // Street Address Validation
         if (!formData.streetAddress) {
             newErrors.streetAddress = 'Street address is required';
             valid = false;
         }
-
-        // Phone Validation
-        const phoneRegex = /^[0-9]{10}$/; // Basic phone number validation
+        const phoneRegex = /^[0-9]{10}$/;
         if (!formData.phone || !phoneRegex.test(formData.phone)) {
             newErrors.phone = 'Please enter a valid phone number (10 digits)';
             valid = false;
         }
-
-        // Email Validation
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         if (!formData.email || !emailRegex.test(formData.email)) {
             newErrors.email = 'Please enter a valid email address';
             valid = false;
         }
-
-        // Region Validation
         if (!formData.region) {
             newErrors.region = 'Region is required';
             valid = false;
@@ -107,32 +95,35 @@ const CheckoutPage = () => {
         }
 
         try {
-            const response = await axios.post(
-                'https://smart-meals-backend.onrender.com/api/v1/orders',
-                {
-                    ...formData,
-                    cartSubtotal: cartTotal,
-                }
-            );
-            const { message, finalTotal, orderDetails } = response.data;
+            // const response = await axios.post(
+            //     'https://smart-meals-backend.onrender.com/api/v1/orders',
+            //     {
+            //         ...formData,
+            //         cartSubtotal: cartTotal,
+            //     }
+            // );
 
-            toast.success(message); // Show success message via toast
-            navigate(`/order/${orderDetails.id}`);
+            toast.success('Order placed successfully!');
+            setOrderPlaced(true); // ✨ Show modal
+            setLoading(false);
         } catch (err) {
             toast.error('There was an error placing your order. Please try again.');
             setLoading(false);
         }
     };
 
-    return (
+    const handleKeepShopping = () => {
+        setOrderPlaced(false);
+        navigate('/meals'); // ✨ Redirect to meals page
+    };
 
+    return (
         <>
             <Header />
             <div className="p-6">
                 <h2 className="text-2xl font-bold">Checkout</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    {/* Form for collecting user data */}
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <h3 className="text-xl font-semibold mb-4">Billing & Shipping Info</h3>
                         <form onSubmit={handleSubmit}>
@@ -193,6 +184,7 @@ const CheckoutPage = () => {
                                     className="border p-2 rounded w-full"
                                 />
                                 {errors.streetAddress && <p className="text-red-500 text-sm">{errors.streetAddress}</p>}
+
                                 <input
                                     type="text"
                                     name="phone"
@@ -203,6 +195,7 @@ const CheckoutPage = () => {
                                     className="border p-2 rounded w-full"
                                 />
                                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+
                                 <input
                                     type="email"
                                     name="email"
@@ -215,7 +208,6 @@ const CheckoutPage = () => {
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
 
-                            {/* Order Summary */}
                             <div className="mt-6">
                                 <h4 className="text-lg font-semibold mb-2">Order Summary</h4>
                                 <div className="space-y-2">
@@ -244,7 +236,6 @@ const CheckoutPage = () => {
                         </form>
                     </div>
 
-                    {/* Order Details */}
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <h3 className="text-xl font-semibold mb-4">Order Details</h3>
                         <div className="space-y-2">
@@ -254,6 +245,35 @@ const CheckoutPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* ✨ Order Placed Modal */}
+            <AnimatePresence>
+                {orderPlaced && (
+                    <motion.div
+                        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <motion.div
+                            className="bg-white rounded-lg shadow-lg p-8 text-center max-w-sm"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <h2 className="text-2xl font-bold mb-4">🎉 Order Placed!</h2>
+                            <p className="text-gray-700 mb-6">Thank you for your purchase.</p>
+                            <button
+                                onClick={handleKeepShopping}
+                                className="bg-orange-500 text-white font-semibold py-2 px-6 rounded hover:bg-orange-600"
+                            >
+                                Keep Shopping
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 };

@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { useNavigate } from 'react-router-dom'; // import navigate
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast'; // 🔥 Import toast!
 
 const MealCard = ({ image, title, description, time, price, quantity, servings, mealkitId }) => {
   const { addToCart } = useCart();
   const [cartQuantity, setCartQuantity] = useState(1);
-  const navigate = useNavigate(); // initialize navigate
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    // Check if the user is logged in (replace this with actual login check)
     const isLoggedIn = localStorage.getItem("user");
 
     if (isLoggedIn) {
-      // If logged in, proceed to add to cart
       addToCart({ image, title, description, time, price, quantity, servings, mealkitId }, cartQuantity);
+      toast.success(`${title} added to cart!`); // ✅ Show toast
     } else {
-      // If not logged in, save the current page URL and redirect to login page
       const currentPage = window.location.pathname;
       navigate("/login", { state: { redirectTo: currentPage } });
     }
   };
 
   const handleCardClick = () => {
-    // Check if the user is logged in (replace this with actual login check)
     const isLoggedIn = localStorage.getItem("user");
 
     if (isLoggedIn) {
-      // If logged in, proceed to add to cart
-      navigate(`/meal/${mealkitId}`); // navigate to detail page
+      navigate(`/meal/${mealkitId}`);
     } else {
-      // If not logged in, save the current page URL and redirect to login page
       navigate("/login", { state: { redirectTo: `/meal/${mealkitId}` } });
     }
   };
@@ -48,13 +44,13 @@ const MealCard = ({ image, title, description, time, price, quantity, servings, 
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      {/* CLICKABLE AREA */}
+      {/* Clickable Area */}
       <div className="relative cursor-pointer" onClick={handleCardClick}>
         <img src={image} alt={title} className="w-full h-48 object-cover" />
       </div>
 
       <div className="p-4">
-        {/* TITLE IS ALSO CLICKABLE */}
+        {/* Title is clickable */}
         <h3
           className="text-blue-900 font-semibold text-sm mb-1 cursor-pointer hover:underline"
           onClick={handleCardClick}
