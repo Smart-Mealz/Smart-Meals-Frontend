@@ -25,13 +25,24 @@ const SignUp = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    
+    
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match.')
+      return
+    }
+
     setLoading(true)
 
+    
+    const { confirmPassword, ...apiPayload } = formData
+
     try {
-      const response = await api.post('/users/register', formData)
+      
+      const response = await api.post('/users/register', apiPayload)
 
       if (response.status === 201) {
         toast.success('Account created successfully!')
@@ -42,13 +53,25 @@ const SignUp = () => {
         toast.error('Registration failed. Please try again.')
       }
     } catch (err) {
-      console.error(err)
-      toast.error(err.response?.data?.message || 'Something went wrong. Please try again.')
-      setError(err.response?.data?.message || 'Something went wrong. Please try again.')
+      console.error("API Error:", err.response?.data)
+      
+      
+      const backendError = 
+        err.response?.data?.message || 
+        err.response?.data?.details?.[0]?.message || 
+        err.response?.data || 
+        'Something went wrong. Please try again.'
+
+      
+      const finalErrorMessage = typeof backendError === 'string' ? backendError : 'Something went wrong. Please try again.'
+
+      toast.error(finalErrorMessage)
+      setError(finalErrorMessage)
     } finally {
       setLoading(false)
     }
   }
+
 
   return (
     <>
