@@ -158,7 +158,7 @@ const Home = () => {
             <p className="font-semibold mb-4">FROM THE BLOG</p>
             <div className="flex flex-col items-center md:items-start">
               <img src={mealkit4} alt="Blog preview" className="w-32 h-20 object-cover mb-2" />
-              <p className="text-sm text-gray-700 font-medium">Blue Apron Celebrates the Heroes Among Us</p>
+              <p className="text-sm text-gray-700 font-medium">Smartmeals Celebrates the Heroes Among Us</p>
             </div>
           </div>
         </div>

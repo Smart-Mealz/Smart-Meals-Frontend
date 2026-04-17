@@ -10,6 +10,15 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const AllMeals = () => {
+   const today = new Date();
+
+  const sunday = new Date(today);
+  sunday.setDate(today.getDate() - today.getDay());
+
+  const weekLabel = sunday.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
   return (
     <>
 
@@ -72,7 +81,10 @@ const AllMeals = () => {
           <p className="text-gray-600 mb-4">
             Easy-to-follow recipes perfectly portioned for two.
           </p>
-          <p className="text-gray-800 font-medium mb-2">Week of April 21st</p>
+          {/* Dynamic Week Label */}
+          <p className="text-gray-800 font-medium mb-2">
+            Week of {weekLabel}
+          </p>
         </section>
 
         <MealKits />
@@ -109,7 +121,7 @@ const AllMeals = () => {
           <p className="text-xs text-gray-500 mt-2">
             Sign up for offers, recipes, news, & more
             <br />
-            (subscribers to the Blue Apron recipe newsletter agree to our
+            (subscribers to the Smartmeal recipe newsletter agree to our
             Privacy Policy)
           </p>
         </div>
@@ -124,7 +136,7 @@ const AllMeals = () => {
               className="w-32 h-20 object-cover mb-2"
             />
             <p className="text-sm text-gray-700 font-medium">
-              Blue Apron Celebrates the Heroes Among Us
+              Smartmeal Celebrates the Heroes Among Us
             </p>
           </div>
         </div>
